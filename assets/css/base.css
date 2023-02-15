@@ -1,0 +1,289 @@
+:root {
+    --white-color:#fff;
+    --black-color:#000;
+    --text-color:#333;
+    --main-color:#ee4d2d;
+    --border-color:#DBDBDB;
+    --rated-star-color:#FFCe3e;
+    --navbar-height:34px;
+    --header-height:120px;
+    --header-with-search-height:calc(var(--header-height) - var(--navbar-height))
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    /* 100% = 16px
+    => 62.5% = 10px
+    => 1rem = 10px */
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* 3 cấp khi responsive dùng grid
+
+        .grid{      (trong grid có thể nhiều row)
+            .row{
+                .col{
+                }
+            }
+
+            .row{   (trong row có thể nhiều col)
+                .col{
+                }
+                .col{
+                }
+            }
+        }
+*/
+
+
+/* Responsive */
+.grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto ;
+    /* max-width  có tác dụng giảm kích thước của width khi màn hình có width nhỏ hơn 1200px
+    margin để tự động căn giữa khối grid khi nằm trong khối khác
+     */
+}
+
+.grid__full-width {
+    width: 100%;
+    /* Trong trường hợp không muốn width = 1200px thì thêm class vào */
+}
+
+.grid__row {
+    display : flex ;
+    flex-wrap : wrap;
+    /* cho tất cả các thẻ chứa class này nằm trên 1 hàng và tự động xuống dòng khi tổng các thẻ vượt quá chiều rộng trang  */
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+
+/* ml mr -12px ở row và pl pr 12px ở col thì nó là nguyên tắc chia grid row và column  */
+/* nó là khoảng cách màu trắng giữa các cột trong nguyên tắc 12 col (2 cột cách nhau 24px) : áp dụng trên PC */
+
+
+/* === Test sau này responsive thì sửa lại sau === */
+.grid__column-2{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 16.6667%;
+}
+
+.grid__column-2-4{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.grid__column-10{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 83.3334%;
+}
+/* ===============================7================= */
+
+/* CSS đã RESET bằng link normalize */
+
+/* ANIMATION */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scale(var(--grow-from)) ;
+    }
+
+    to {
+        transform: scale( var(--grow-to));
+    }
+}
+
+
+/* MODAL */
+.modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn linear 0.1s;
+}
+
+.modal__overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__body{
+    --grow-from:0.7;
+    --grow-to:1;
+    margin: auto;
+    background-color:#fff;
+    z-index: 1;
+    /* thằng nào có z-index cao nhất thì nó sẽ nổi lên trên cùng */
+    border-radius: 5px;
+    animation: grow linear 0.1s;
+}
+
+/* BUTTON */
+
+.btn {
+    min-width: 124px;
+    height: 34px;
+    border: none;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    font-size: 1.5rem;
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    color:var(--text-color);
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6rem;
+}
+
+.btn.btn--normal:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn--size-s {
+    height: 32px;
+    font-size: 1.2rem;
+    padding: 0 8px;
+}
+
+.btn.btn--primary{
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+.btn.btn--disable {
+    cursor: default;
+    background-color: #949494;
+    color: #c3c3c3;
+}
+
+.btn__control--back {
+    margin-right: 8px;
+}
+
+/* SELECTION */
+
+.select-input{
+    min-width: 200px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.select-input__label{
+    font-size: 1.4rem;
+}
+
+.select-input__label-icon{
+    font-size: 1.4rem;
+    color: rgb(131, 131, 131);
+    position: relative;
+    top: 1px;
+}
+
+.select-input__list{
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    padding: 8px 16px;
+    background-color: var(--white-color);
+    list-style: none;
+    border-radius: 2px;
+    display: none;
+    z-index: 1;
+}
+
+.select-input__link{
+    font-size: 1.4rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+}
+
+.select-input__link:hover{
+    color: var(--main-color);
+}
+
+.select-input:hover .select-input__list{
+    display: block;
+}
+
+/* PAGINATION */
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination-item{
+    margin: 0 12px;
+}
+
+.pagination-item--current-page .pagination-item__link{
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+.pagination-item__link{
+    --height: 30px;
+    display: block;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #939393;
+    min-width: 40px;
+    height: var(--height);
+    background-color: transparent;
+    text-align: center;
+    line-height: var(--height);
+    border-radius: 2px;
+}
+
+.pagination-item--current-page .pagination-item__link:hover{
+    background-color: #ed5c3f;
+}
+
+
+
+
+
